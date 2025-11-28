@@ -9,34 +9,45 @@ export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
 
   login(username: string, password: string): Observable<any> {
-    // Remove the HTTP call completely - use mock authentication
-    const isAuthenticated = username === 'admin' && password === 'password123';
+    console.log('Login attempt for user:', username);
     
+    const isValid = username === 'admin' && password === 'password123';
+    
+    if (!isValid) {
+      // Instant response for invalid credentials
+      console.log('Login failed: Invalid credentials');
+      return of({
+        success: false,
+        message: 'Invalid username or password. Please check your credentials and try again.',
+        token: null
+      });
+    }
+
+    // Simulate API call only for valid credentials
     return of({
-      success: isAuthenticated,
-      message: isAuthenticated ? 'Login successful' : 'Invalid credentials',
-      token: isAuthenticated ? 'mock-jwt-token-' + Date.now() : null
+      success: true,
+      message: 'Login successful',
+      token: 'mock-jwt-token-' + Date.now()
     }).pipe(
-      delay(800), // Simulate network delay
+      delay(800), // Simulate API call
       tap((response: any) => {
-        if (response.success && response.token) {
-          this.setToken(response.token);
-        }
+        this.setToken(response.token);
+        console.log('Login successful, token set');
       })
     );
   }
 
   setToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    sessionStorage.setItem('authToken', token);
     this.isAuthenticated.next(true);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return sessionStorage.getItem('authToken');
   }
 
   logout(): void {
-    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
     this.isAuthenticated.next(false);
   }
 
@@ -45,6 +56,6 @@ export class AuthService {
   }
 
   private hasToken(): boolean {
-    return !!localStorage.getItem('authToken');
+    return !!sessionStorage.getItem('authToken');
   }
 }

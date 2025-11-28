@@ -19,28 +19,38 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    if (!this.username || !this.password) {
+   
+    this.errorMessage = '';
+    if (!this.username.trim() || !this.password.trim()) {
       this.errorMessage = 'Please enter both username and password';
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
 
-    
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
         this.isLoading = false;
         if (response.success) {
           this.router.navigate(['/report']);
         } else {
-          this.errorMessage = response.message;
+          this.errorMessage = response.message || 'Invalid credentials. Please try again.';
+          this.password = '';
         }
       },
-      error: () => {
+      error: (error) => {
         this.isLoading = false;
         this.errorMessage = 'Login failed. Please try again.';
+        this.password = ''; 
+        console.error('Login error:', error);
       }
     });
+  }
+
+  
+  onInputChange(): void {
+    if (this.errorMessage) {
+      this.errorMessage = '';
+    }
   }
 }
