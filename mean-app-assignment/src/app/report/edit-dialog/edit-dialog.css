@@ -1,0 +1,169 @@
+.edit-dialog {
+  background: white;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #4a5568;
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.dialog-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid #e2e8f0;
+  background-color: #f7fafc;
+  border-radius: 0 0 8px 8px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 80px;
+}
+
+.btn-cancel {
+  background-color: #a0aec0;
+  color: white;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background-color: #718096;
+}
+
+.btn-save {
+  background-color: #4299e1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: #3182ce;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .edit-dialog {
+    width: 95vw;
+  }
+  
+  .dialog-body {
+    padding: 15px;
+  }
+  
+  .dialog-actions {
+    padding: 15px;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    min-width: 70px;
+  }
+}

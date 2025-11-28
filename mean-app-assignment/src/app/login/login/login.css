@@ -1,0 +1,131 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #4a5568;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #4299e1;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #3182ce;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.demo-credentials {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f7fafc;
+  border-radius: 6px;
+  border-left: 4px solid #4299e1;
+}
+
+.demo-credentials p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.demo-credentials code {
+  background-color: #edf2f7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}

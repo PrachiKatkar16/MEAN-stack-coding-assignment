@@ -1,0 +1,141 @@
+<div class="report-container">
+  <div class="header">
+    <h1>Report Screen</h1>
+    <button class="btn btn-logout" (click)="logout()">Logout</button>
+  </div>
+
+  <!-- Success Message -->
+  @if (successMessage()) {
+    <div class="alert alert-success">
+      <strong>Success!</strong> {{ successMessage() }}
+      <button class="close-btn" (click)="clearMessage()">×</button>
+    </div>
+  }
+
+  <!-- Info Message -->
+  @if (infoMessage()) {
+    <div class="alert alert-info">
+       {{ infoMessage() }}
+      <button class="close-btn" (click)="clearMessage()">×</button>
+    </div>
+  }
+
+  <!-- Error Message -->
+  @if (errorMessage()) {
+    <div class="alert alert-error">
+      <strong>Error:</strong> {{ errorMessage() }}
+      <button class="close-btn" (click)="clearMessage()">×</button>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Processing...</p>
+    </div>
+  }
+
+  <!-- Data Table -->
+  @if (!isLoading() && objects().length > 0) {
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (object of objects(); track object.id) {
+            <tr>
+              <td class="id-cell">{{ object.id }}</td>
+              
+              <!-- Name Column -->
+              <td>
+                @if (editingId() === object.id) {
+                  <input 
+                    type="text" 
+                    class="edit-input"
+                    [(ngModel)]="editedName"
+                    placeholder="Enter name">
+                } @else {
+                  {{ object.name || 'N/A' }}
+                }
+              </td>
+
+              <!-- Color Column -->
+              <td>
+                @if (editingId() === object.id) {
+                  <input 
+                    type="text" 
+                    class="edit-input"
+                    [(ngModel)]="editedColor"
+                    placeholder="Enter color">
+                } @else {
+                  {{ getProperty(object, 'color') }}
+                }
+              </td>
+
+              <!-- Capacity Column -->
+              <td>
+                @if (editingId() === object.id) {
+                  <input 
+                    type="text" 
+                    class="edit-input"
+                    [(ngModel)]="editedCapacity"
+                    placeholder="Enter capacity">
+                } @else {
+                  {{ getProperty(object, 'capacity') }}
+                }
+              </td>
+
+              <!-- Price Column -->
+              <td class="price-cell">
+                @if (editingId() === object.id) {
+                  <input 
+                    type="number" 
+                    class="edit-input"
+                    [(ngModel)]="editedPrice"
+                    placeholder="Enter price"
+                    step="0.01">
+                } @else {
+                  {{ getPriceDisplay(object) }}
+                }
+              </td>
+
+              <!-- Actions Column -->
+              <td class="actions-cell">
+                @if (editingId() === object.id) {
+                  <div class="edit-actions">
+                    <button class="btn btn-save" (click)="saveEdit()">
+                      Save
+                    </button>
+                    <button class="btn btn-cancel" (click)="cancelEdit()">
+                      Cancel
+                    </button>
+                  </div>
+                } @else {
+                  <button class="btn btn-edit" (click)="startEdit(object)">
+                    Edit
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!isLoading() && objects().length === 0 && !errorMessage()) {
+    <div class="empty-state">
+      <p>No data available from API</p>
+    </div>
+  }
+</div>
